@@ -6,17 +6,41 @@
     <!--根据id更新员工基本信息-->
     <update id="updateById">
         update emp
-        set username = #{username},
-            password = #{password},
-            name = #{name},
-            gender = #{gender},
-            phone = #{phone},
-            job = #{job},
-            salary = #{salary},
-            image = #{image},
-            entry_date = #{entryDate},
-            dept_id = #{deptId},
-            update_time = #{updateTime}
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="job != null and job != ''">
+                job = #{job},
+            </if>
+            <if test="salary != null">
+                salary = #{salary},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="entryDate != null">
+                entry_date = #{entryDate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
         where id = #{id};
     </update>
 
@@ -82,5 +106,27 @@
                ee.end ee_end
         from emp e left join emp_expr ee on e.id = ee.emp_id
         where e.id = #{id};
+    </select>
+
+    <!--统计员工职位人数数据-->
+    <select id="countJobEmpData" resultType="java.util.Map">
+        select
+            (case
+                 when job = 1 then '班主任'
+                 when job = 2 then '讲师'
+                 when job = 3 then '学工主管'
+                 when job = 4 then '校验主管'
+                 when job = 5 then '咨询师'
+                 else '其它'
+                end) pos,count(0) num
+        from emp
+        group by job
+    </select>
+
+    <!--统计员工性别人数信息-->
+    <select id="countEmpGenderData" resultType="java.util.Map">
+        select if(gender = 1,'男性员工','女性员工') name, count(0) value
+        from emp
+        group by gender;
     </select>
 </mapper>

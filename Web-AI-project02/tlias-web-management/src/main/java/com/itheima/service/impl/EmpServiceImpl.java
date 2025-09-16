@@ -81,7 +81,7 @@ public class EmpServiceImpl implements EmpService {
         } finally {
             //记录日志
             EmpLog empLog = new EmpLog(null, LocalDateTime.now(), "新增员工" + emp);
-            empLogService.insertLog(empLog) ;
+            empLogService.insertLog(empLog);
         }
     }
 
