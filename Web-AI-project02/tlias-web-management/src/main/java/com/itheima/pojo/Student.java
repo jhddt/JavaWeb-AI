@@ -26,5 +26,6 @@ public class Student {
     private Short violationScore; //违纪扣分
     private LocalDateTime createTime; //创建时间
     private LocalDateTime updateTime; //修改时间
+
     private String clazzName;//班级名称
 }

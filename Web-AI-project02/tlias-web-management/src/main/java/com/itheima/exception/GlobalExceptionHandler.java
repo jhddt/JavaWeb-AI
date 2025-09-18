@@ -2,10 +2,11 @@ package com.itheima.exception;
 
 import com.itheima.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.aot.hint.annotation.RegisterReflection;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 /**
  * 全局异常处理器
@@ -35,6 +36,24 @@ public class GlobalExceptionHandler {
         String[] arr = errMsg.split(" ");
         // 返回格式化的错误信息，提示用户哪个值已经存在
         return Result.error(arr[2] + "已经存在");
+    }
+
+    /**
+     * 处理外键约束异常
+     * 当违反数据库外键约束时（如删除被引用的记录或插入不存在的外键值），该方法会捕获异常并返回友好的错误信息
+     * @param e SQLIntegrityConstraintViolationException异常对象
+     * @return 包含外键约束错误信息的Result对象
+     */
+    @ExceptionHandler
+    public Result handleForeignKeyConstraintException(DataIntegrityViolationException e) {
+        log.error("外键约束异常：", e);
+        String message = e.getMessage();
+        // 检查是否是外键约束异常
+        if (message.contains("foreign key constraint fails")) {
+            return Result.error("对不起，当前部门下有员工，不能直接删除！");
+        }
+        // 默认外键错误信息
+        return Result.error("操作失败：违反了数据完整性约束");
     }
 
 

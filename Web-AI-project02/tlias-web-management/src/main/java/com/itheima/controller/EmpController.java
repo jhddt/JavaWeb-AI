@@ -2,14 +2,10 @@ package com.itheima.controller;
 
 import com.itheima.pojo.*;
 import com.itheima.service.EmpService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,7 +18,21 @@ import java.util.List;
 public class EmpController {
     @Autowired
     private EmpService empService;
-    //查询所有员工信息
+
+    /**
+     * 查询全部员工信息
+     */
+    @GetMapping("/list")
+    public Result selectAll(){
+        log.info("查询所有员工信息");
+        List<Emp> empList = empService.selectAll();
+        return Result.success(empList);
+    }
+
+
+    /**
+     * 分页查询所有员工信息
+     */
     @GetMapping
     public Result pageSelect(EmpQueryParam empQueryParam){
         log.info("分页查询的页码和每一页的大小：{}",empQueryParam);
@@ -30,7 +40,9 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
-    //添加员工信息
+    /**
+     * 添加员工信息
+     */
     @PostMapping
     public Result addEmp(@RequestBody Emp emp){
         log.info("前端传入的参数：{}",emp);
@@ -38,9 +50,11 @@ public class EmpController {
         return Result.success();
     }
 
-    //删除员工信息
+    /**
+     * 删除员工信息
+     */
     //用数组的方式接收数据
-/*    @DeleteMapping("#{id}")
+/*    @DeleteMapping("/{id}")
     public Result delete(Integer[] ids){
         log.info("需要删除的员工ID：{}", Arrays.toString(ids));
         return Result.success();
@@ -54,7 +68,7 @@ public class EmpController {
     }
 
     /**
-     * 根据id查询员工信息以及员工工作经历信息
+     * 根据id查询员工信息以及员工工作经历信息（为修改员工信息查询回显）
      */
     @GetMapping("/{id}")
     public Result getInfo(@PathVariable("id") Integer id){

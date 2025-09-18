@@ -54,7 +54,7 @@
 
     <!--根据各种条件查询员工的基本信息-->
     <select id="list" resultType="com.itheima.pojo.Emp">
-        select e.*, d.name
+        select e.*, d.name deptName
         from emp e left join dept d on e.dept_id = d.id
         <where>
         <if test="name != null and name != ''">
@@ -96,6 +96,8 @@
             <result property="job" column="ee_job"/>
         </collection>
     </resultMap>
+
+    <!--通过id查询员工信息-->
     <select id="getById" resultMap="empResultMap">
         select e.*,
                ee.id ee_id,
@@ -110,17 +112,17 @@
 
     <!--统计员工职位人数数据-->
     <select id="countJobEmpData" resultType="java.util.Map">
-        select
-            (case
-                 when job = 1 then '班主任'
-                 when job = 2 then '讲师'
-                 when job = 3 then '学工主管'
-                 when job = 4 then '校验主管'
-                 when job = 5 then '咨询师'
-                 else '其它'
-                end) pos,count(0) num
-        from emp
-        group by job
+        select (case
+                    when degree = 1 then '初中'
+                    when degree = 2 then '高中'
+                    when degree = 3 then '大专'
+                    when degree = 4 then '本科'
+                    when degree = 5 then '硕士'
+                    when degree = 6 then '博士'
+                    else '其它'
+                end) degree, count(*) num
+        from student
+        group by degree;
     </select>
 
     <!--统计员工性别人数信息-->
@@ -128,5 +130,11 @@
         select if(gender = 1,'男性员工','女性员工') name, count(0) value
         from emp
         group by gender;
+    </select>
+
+    <!--查询所有员工信息-->
+    <select id="selectAll" resultType="com.itheima.pojo.Emp">
+        select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time
+        from emp e;
     </select>
 </mapper>

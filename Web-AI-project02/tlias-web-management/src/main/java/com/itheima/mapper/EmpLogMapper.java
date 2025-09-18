@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 记录员工信息日志
+ */
 @Mapper
 public interface EmpLogMapper {
 

@@ -124,4 +124,12 @@ public class EmpServiceImpl implements EmpService {
             empExprMapper.addEmpExpr(exprList);
         }
     }
+
+    /**
+     * 查询所有员工信息
+     */
+    @Override
+    public List<Emp> selectAll() {
+        return empMapper.selectAll();
+    }
 }

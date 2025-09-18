@@ -6,18 +6,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 /**
- * 员工信息分页查询实体类
+ * 班级信息分页查询实体类
  */
 @Data
-public class EmpQueryParam {
-
+public class ClazzQueryParam {
     private Integer page = 1; //页码
     private Integer pageSize = 10; //每页展示记录数
-    private String name; //姓名
-    private Integer gender; //性别
+    private String name; //班级名称
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate begin; //入职开始时间
+    private LocalDate begin; //范围匹配的开始时间(结课时间)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate end; //入职结束时间
-
+    private LocalDate end; //范围匹配的结束时间(结课时间)
 }
