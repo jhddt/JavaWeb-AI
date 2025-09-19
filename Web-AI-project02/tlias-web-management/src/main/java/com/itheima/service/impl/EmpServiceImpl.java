@@ -14,7 +14,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -131,5 +133,23 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public List<Emp> selectAll() {
         return empMapper.selectAll();
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        //1.调用mapper接口查询用户名和密码
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+        //2.判断：判断是否存在员工，如果存在，组装登录成功信息
+        //生成JWT令牌
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id",e.getId());
+        claims.put("username",e.getUsername());
+        String jwt = JwtUtils.generateJwt(claims);
+        if (e != null){
+            return new LoginInfo(e.getId(),e.getUsername(), e.getName(),jwt);
+        }
+        //3.不存在，返回null
+        return null;
+
     }
 }

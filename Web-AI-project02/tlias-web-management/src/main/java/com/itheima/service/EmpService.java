@@ -2,6 +2,7 @@ package com.itheima.service;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryParam;
+import com.itheima.pojo.LoginInfo;
 import com.itheima.pojo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,4 +40,9 @@ public interface EmpService {
      * 查询所有员工信息
      */
     List<Emp> selectAll();
+
+    /**
+     * 用户登录
+     */
+    LoginInfo login(Emp emp);
 }

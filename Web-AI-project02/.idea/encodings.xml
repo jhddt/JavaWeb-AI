@@ -2,5 +2,8 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/main/java/com/itheima/controller/SessionController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/test/java/com/itheima/Test.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tlias-web-management/src/test/java/com/itheima/TliasWebManagementApplicationTests.java" charset="UTF-8" />
   </component>
 </project>

@@ -56,5 +56,16 @@ public class GlobalExceptionHandler {
         return Result.error("操作失败：违反了数据完整性约束");
     }
 
+    /**
+     * 处理数字格式异常
+     * 当输入的分数不是有效数字或超出范围时，该方法会捕获异常并返回友好的错误信息
+     * @param e NumberFormatException异常对象
+     * @return 包含"超过最大分数"信息的Result对象
+     */
+    @ExceptionHandler
+    public Result handleNumberFormatException(NumberFormatException e) {
+        log.error("数字格式异常：", e);
+        return Result.error("超过最大分数");
+    }
 
 }
