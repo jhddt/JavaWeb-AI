@@ -1,4 +1,4 @@
-package com.itheima.pojo;
+package com.itheima.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,9 +18,9 @@ public class JwtUtils {
      */
     public static String generateJwt(Map<String,Object> claims){
         String jwt = Jwts.builder()
-                .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS256, signKey)
-                .setExpiration(new Date(System.currentTimeMillis() + expire))
+                .addClaims(claims)//添加自定义密钥
+                .signWith(SignatureAlgorithm.HS256, signKey)//指定加密算法
+                .setExpiration(new Date(System.currentTimeMillis() + expire))//指定有效期
                 .compact();
         return jwt;
     }
