@@ -25,8 +25,6 @@ public class AliyunOSSOperator {
     private String region;*/
 
 
-
-
     public String upload(byte[] content, String originalFilename) throws Exception {
 
         //用实体类的方式注入
