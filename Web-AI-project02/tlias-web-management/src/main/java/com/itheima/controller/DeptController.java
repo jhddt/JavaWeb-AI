@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Dept;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
@@ -62,6 +63,7 @@ public class DeptController {
      * 根据id删除部门信息   方法三：根据@RequestParam获取请求参数
      * 如果请求参数的名称和形参变量名相同，直接定义方法形参即可接收。
      */
+    @Log
     @DeleteMapping
     public Result deleteById(Integer id){
         log.info("根据id删除部门：{}",id);
@@ -73,6 +75,7 @@ public class DeptController {
      * 添加部门信息
      * @RequestBody可以将json数据封装成对象参数传递
      */
+    @Log
     @PostMapping
     public Result insertByName(@RequestBody Dept dept){
         log.info("添加部门信息：{}",dept);
@@ -94,6 +97,7 @@ public class DeptController {
     /**
      * 修改部门信息
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept){
         log.info("修改部门数据：{}",dept);

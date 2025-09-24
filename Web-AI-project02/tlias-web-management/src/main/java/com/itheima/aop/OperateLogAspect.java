@@ -1,6 +1,7 @@
 package com.itheima.aop;
 
 import com.itheima.mapper.OperateLogMapper;
+import com.itheima.pojo.CurrentHolder;
 import com.itheima.pojo.OperateLog;
 import com.itheima.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
@@ -15,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Slf4j
 @Aspect
@@ -34,23 +36,28 @@ public class OperateLogAspect {
         String methodName = joinPoint.getSignature().getName();
 
         // 获取方法参数
-        String methodParams = stringify(joinPoint.getArgs());
+        String methodParams = Arrays.toString(joinPoint.getArgs());
 
+        //方法1
         // 获取操作人ID（从JWT中解析）
-        Integer operateEmpId = null;
-        try {
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            if (attributes != null) {
-                HttpServletRequest request = attributes.getRequest();
-                String jwt = request.getHeader("token");
-                if (jwt != null) {
-                    Claims claims = JwtUtils.parseJWT(jwt);
-                    operateEmpId = (Integer) claims.get("id");
-                }
-            }
-        } catch (Exception e) {
-            log.warn("获取操作人ID失败: {}", e.getMessage());
-        }
+//        Integer operateEmpId = null;
+//        try {
+//            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//            if (attributes != null) {
+//                HttpServletRequest request = attributes.getRequest();
+//                String jwt = request.getHeader("token");
+//                if (jwt != null) {
+//                    Claims claims = JwtUtils.parseJWT(jwt);
+//                    operateEmpId = (Integer) claims.get("id");
+//                }
+//            }
+//        } catch (Exception e) {
+//            log.warn("获取操作人ID失败: {}", e.getMessage());
+//        }
+
+        //方法2
+        //从ThreadLocal中获取员工的ID
+        Integer operateEmpId = CurrentHolder.getCurrentId();
 
         Object result = null;
         
@@ -65,11 +72,6 @@ public class OperateLogAspect {
             long endTime = System.currentTimeMillis();
             long costTime = endTime - startTime;
 
-            // 获取返回值
-            String returnValue = null;
-            if (result != null) {
-                returnValue = stringify(result);
-            }
 
             // 创建操作日志对象
             OperateLog operateLog = new OperateLog();
@@ -78,7 +80,7 @@ public class OperateLogAspect {
             operateLog.setClassName(className);
             operateLog.setMethodName(methodName);
             operateLog.setMethodParams(methodParams);
-            operateLog.setReturnValue(returnValue);
+            operateLog.setReturnValue(result.toString());
             operateLog.setCostTime(costTime);
 
             // 保存日志到数据库
@@ -88,13 +90,5 @@ public class OperateLogAspect {
                 log.error("保存操作日志失败: {}", e.getMessage());
             }
         }
-    }
-    
-    // 简单的对象转字符串方法
-    private String stringify(Object obj) {
-        if (obj == null) {
-            return null;
-        }
-        return obj.toString();
     }
 }
