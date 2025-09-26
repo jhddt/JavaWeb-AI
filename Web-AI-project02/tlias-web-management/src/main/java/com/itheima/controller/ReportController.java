@@ -1,8 +1,6 @@
 package com.itheima.controller;
 
-import com.itheima.pojo.ClazzOption;
-import com.itheima.pojo.JobOption;
-import com.itheima.pojo.Result;
+import com.itheima.pojo.*;
 import com.itheima.service.ReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
-@RequestMapping("/report")
 @RestController
 
 public class ReportController {
@@ -23,7 +20,7 @@ public class ReportController {
     /**
      * 统计职位人数信息
      */
-    @GetMapping("/empJobData")
+    @GetMapping("/report/empJobData")
     public Result countJob(){
         log.info("统计职位人数");
         JobOption jobOption = reportService.getEmpJobData();
@@ -33,7 +30,7 @@ public class ReportController {
     /**
      * 统计员工性别信息
      */
-    @GetMapping("/empGenderData")
+    @GetMapping("/report/empGenderData")
     public Result countgender(){
         log.info("统计员工性别信息");
         List<Map<String, Object>> genderDate = reportService.getEmpGenderData();
@@ -43,7 +40,7 @@ public class ReportController {
     /**
      * 班级人数统计
      */
-    @GetMapping("/studentCountData")
+    @GetMapping("/report/studentCountData")
     public Result studentCountData(){
         log.info("统计班级人数");
         ClazzOption clazzOption = reportService.studentCountData();
@@ -53,7 +50,7 @@ public class ReportController {
     /**
      * 统计学员学历信息
      */
-    @GetMapping("/studentDegreeData")
+    @GetMapping("/report/studentDegreeData")
     public Result studentDegreeData(){
         log.info("统计学员学历信息");
         List<Map<String, Object>> degreeDate = reportService.studentDegreeData();
@@ -63,9 +60,10 @@ public class ReportController {
     /**
      * 日志列表查询
      */
-/*    @GetMapping("/page")
-    public Result getlogPage(@RequestParam(defaultValue = "1") Integer page,@RequestParam(defaultValue = "10") Integer pageSize){
+    @GetMapping("/log/page")
+    public Result getlogPage(Integer page,Integer pageSize){
         log.info("查询日志列表信息");
-        reportService.getlogPage(page,pageSize);
-    }*/
+        PageResult<OperateLog> operateLogList = reportService.getlogPage(page,pageSize);
+        return Result.success(operateLogList);
+    }
 }

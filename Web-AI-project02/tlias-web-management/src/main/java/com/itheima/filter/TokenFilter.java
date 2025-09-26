@@ -63,6 +63,7 @@ public class TokenFilter implements Filter {
         filterChain.doFilter(request,response);
 
         //7.删除ThreadLocal中的数据(放行之后再删除)
+        log.info("删除ThreadLocal中的数据......");
         CurrentHolder.remove();
     }
 }

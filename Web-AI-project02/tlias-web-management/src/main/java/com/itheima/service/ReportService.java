@@ -2,6 +2,8 @@ package com.itheima.service;
 
 import com.itheima.pojo.ClazzOption;
 import com.itheima.pojo.JobOption;
+import com.itheima.pojo.OperateLog;
+import com.itheima.pojo.PageResult;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +32,12 @@ public interface ReportService {
      * @return List<Map<String, Object>> 学历统计数据列表，每个Map包含学历和对应人数
      */
     List<Map<String, Object>> studentDegreeData();
+
+    /**
+     * 统计员工操作的日志信息
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PageResult<OperateLog> getlogPage(Integer page, Integer pageSize);
 }

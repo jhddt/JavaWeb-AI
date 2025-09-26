@@ -1,10 +1,12 @@
 package com.itheima.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.ClazzMapper;
 import com.itheima.mapper.EmpMapper;
+import com.itheima.mapper.OperateLogMapper;
 import com.itheima.mapper.StudentMapper;
-import com.itheima.pojo.ClazzOption;
-import com.itheima.pojo.JobOption;
+import com.itheima.pojo.*;
 import com.itheima.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class ReportServiceImpl implements ReportService {
     private ClazzMapper clazzMapper;
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private OperateLogMapper operateLogMapper;
 
     /**
      * 统计职位人数信息
@@ -63,5 +67,21 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Map<String, Object>> studentDegreeData() {
         return studentMapper.studentDegreeData();
+    }
+
+    /**
+     * 统计员工操作的日志信息
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageResult<OperateLog> getlogPage(Integer page, Integer pageSize) {
+        //设置分页操作
+        PageHelper.startPage(page,pageSize);
+        List<OperateLog> operateLogList = operateLogMapper.selectAllOperateLog();
+        //解析分页参数并封装
+        Page<OperateLog> p = (Page<OperateLog>) operateLogList;
+        return new PageResult<OperateLog>(p.getTotal(),p.getResult());
     }
 }

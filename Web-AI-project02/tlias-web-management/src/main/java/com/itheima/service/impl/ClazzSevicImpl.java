@@ -44,7 +44,7 @@ public class ClazzSevicImpl implements ClazzService {
             }
         }
 
-        //3.解析查询参数并封装
+        //3.解析分页参数并封装
         Page<Clazz> p = (Page<Clazz>) clazzList;
         return new PageResult<Clazz>(p.getTotal(),p.getResult());
     }

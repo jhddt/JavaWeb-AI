@@ -60,7 +60,7 @@
                     else '其它'
             end) name, count(*) value
         from student
-        group by degree;
+        group by degree
     </select>
 
     <!--查询所有学员信息并分页展示-->
