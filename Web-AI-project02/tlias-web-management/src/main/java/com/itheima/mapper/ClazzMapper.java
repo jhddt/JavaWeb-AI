@@ -15,10 +15,6 @@ public interface ClazzMapper {
 
     /**
      *分页查询全部班级信息
-     * @param name
-     * @param begin
-     * @param end
-     * @return
      */
     List<Clazz> list(String name, LocalDate begin, LocalDate end);
 

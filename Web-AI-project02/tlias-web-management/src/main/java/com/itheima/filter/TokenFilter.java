@@ -49,9 +49,9 @@ public class TokenFilter implements Filter {
         }
         //5.如果token存在，校验令牌，如果校验失败，也是返回错误信息（响应401状态码）
         try {
-            Claims claims = JwtUtils.parseJWT(token);
-            Integer empId = Integer.valueOf(claims.get("id").toString());
-            CurrentHolder.setCurrentId(empId);// 放入
+            Claims claims = JwtUtils.parseJWT(token); //解析令牌
+            Integer empId = Integer.valueOf(claims.get("id").toString()); //获取员工ID
+            CurrentHolder.setCurrentId(empId);// 将获取员工ID放入ThreadLocal
             log.info("当前登录的员工ID：{}将其存入ThreadLocal", empId);
         } catch (Exception e) {
             log.info("令牌非法，响应401状态码...");
@@ -64,6 +64,6 @@ public class TokenFilter implements Filter {
 
         //7.删除ThreadLocal中的数据(放行之后再删除)
         log.info("删除ThreadLocal中的数据......");
-        CurrentHolder.remove();
+        CurrentHolder.remove(); // 删除ThreadLocal中的数据, 因为当前线程已经处理完毕
     }
 }

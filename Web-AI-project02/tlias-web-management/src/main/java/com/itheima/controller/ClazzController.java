@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Clazz;
 import com.itheima.pojo.ClazzQueryParam;
 import com.itheima.pojo.PageResult;
@@ -23,7 +24,7 @@ public class ClazzController {
 
 
     /**
-     * 查询所有班级信息
+     * 分页查询所有班级信息
      */
     @GetMapping("/list")
     public Result selectAll(){
@@ -58,6 +59,7 @@ public class ClazzController {
     /**
      * 新增班级接口
      */
+    @Log
     @PostMapping
     public Result addClazzData(@RequestBody Clazz clazz){
         log.info("添加班级信息：{}",clazz);
@@ -68,6 +70,7 @@ public class ClazzController {
     /**
      * 修改班级信息
      */
+    @Log
     @PutMapping
     public Result updateClazzData(@RequestBody Clazz clazz){
         log.info("修改班级数据：{}",clazz);
@@ -79,6 +82,7 @@ public class ClazzController {
     /**
      * 根据id删除班级信息
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result deleteClazzData(@PathVariable("id") Integer id){
         log.info("根据id删除班级信息");

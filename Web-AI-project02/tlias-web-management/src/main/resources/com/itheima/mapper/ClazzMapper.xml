@@ -33,7 +33,7 @@
 
     <!--根据各种条件查询班级的基本信息-->
     <select id="list" resultType="com.itheima.pojo.Clazz">
-        select c.id, c.name, c.room, c.begin_date, c.end_date, c.master_id, c.subject, c.create_time, c.update_time, e.name masterName
+        select c.*, e.name masterName
         from clazz c left join emp e on c.master_id = e.id
         <where>
             <if test="name != null and name != ''">

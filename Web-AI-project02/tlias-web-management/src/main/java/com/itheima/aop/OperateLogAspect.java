@@ -26,15 +26,13 @@ public class OperateLogAspect {
     @Autowired
     private OperateLogMapper operateLogMapper;
 
-    @Around("@annotation(com.itheima.anno.Log)")
+    @Around("@annotation(com.itheima.anno.Log)") // 定义切点，指定方法级别
     public Object recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
         // 记录开始时间
         long startTime = System.currentTimeMillis();
-
         // 获取目标类名和方法名
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = joinPoint.getSignature().getName();
-
         // 获取方法参数
         String methodParams = Arrays.toString(joinPoint.getArgs());
 
@@ -71,7 +69,6 @@ public class OperateLogAspect {
             // 记录结束时间
             long endTime = System.currentTimeMillis();
             long costTime = endTime - startTime;
-
 
             // 创建操作日志对象
             OperateLog operateLog = new OperateLog();

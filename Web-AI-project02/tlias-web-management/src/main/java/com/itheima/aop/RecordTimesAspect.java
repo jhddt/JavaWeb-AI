@@ -7,10 +7,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Aspect
+@Aspect // 声明当前类为切面类
 @Component
 public class RecordTimesAspect {
-    @Around("execution(* com.itheima.service.impl.*.*(..))")
+    @Around("execution(* com.itheima.service.impl.*.*(..))") // 定义切点，环绕通知
     public Object recordTime(ProceedingJoinPoint pjp) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = pjp.proceed();

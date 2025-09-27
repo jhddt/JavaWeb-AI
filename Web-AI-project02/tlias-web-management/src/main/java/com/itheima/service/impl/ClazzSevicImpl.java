@@ -31,7 +31,6 @@ public class ClazzSevicImpl implements ClazzService {
         PageHelper.startPage(clazzQueryParam.getPage(),clazzQueryParam.getPageSize());
         //2.执行查询
         List<Clazz> clazzList = clazzMapper.list(clazzQueryParam.getName(),clazzQueryParam.getBegin(),clazzQueryParam.getEnd());
-
         // 设置班级状态
         LocalDate now = LocalDate.now();
         for (Clazz clazz : clazzList) {
