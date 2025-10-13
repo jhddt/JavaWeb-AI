@@ -19,7 +19,6 @@ import org.springframework.context.annotation.Import;
 //@ComponentScan(basePackages = {"com.example","com.itheima"})//指定组件扫描的范围
 
 
-
 @ServletComponentScan//开启了SpringBoot对Servlet组件的支持
 @SpringBootApplication
 public class TliasWebManagementApplication {

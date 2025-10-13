@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 //@EnableHeaderConfig
 
 
-////自动配置实现方案一：@Componet + @ComponetScan
+//自动配置实现方案一：@Componet + @ComponetScan
 //@ComponentScan(basePackages = {"com.example","com.itheima"})//指定组件扫描的范围
 
 

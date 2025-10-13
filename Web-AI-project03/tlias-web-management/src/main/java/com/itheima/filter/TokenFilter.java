@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebFilter("/*")
 public class TokenFilter implements Filter {
     /**
-     *
+     * 过滤器方法
      * @param servletRequest 请求对象
      * @param servletResponse 响应对象
      * @param filterChain
