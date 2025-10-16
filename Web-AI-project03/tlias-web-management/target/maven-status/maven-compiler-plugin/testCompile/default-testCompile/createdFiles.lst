@@ -1,2 +1,11 @@
+com\itheima\ReportControllerTest.class
+com\itheima\EmpServiceTest.class
 com\itheima\TliasWebManagementApplicationTests.class
+com\itheima\ReportServiceTest.class
+com\itheima\LoginControllerTest.class
+com\itheima\DeptServiceTest.class
+com\itheima\EmpControllerTest.class
 com\itheima\Test.class
+com\itheima\BaseSpringBootTest.class
+com\itheima\DeptControllerTest.class
+com\itheima\JwtUtilsTest.class
