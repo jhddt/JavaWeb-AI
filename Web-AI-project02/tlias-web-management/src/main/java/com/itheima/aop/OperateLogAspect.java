@@ -26,7 +26,7 @@ public class OperateLogAspect {
     @Autowired
     private OperateLogMapper operateLogMapper;
 
-    @Around("@annotation(com.itheima.anno.Log)") // 定义切点，指定方法级别
+    @Around("@annotation(com.itheima.anno.Log)") // 定义切点，指定方法级别  环绕通知
     public Object recordLog(ProceedingJoinPoint joinPoint) throws Throwable {
         // 记录开始时间
         long startTime = System.currentTimeMillis();
