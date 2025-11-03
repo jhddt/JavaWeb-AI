@@ -138,11 +138,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <!--引入第三方的库-->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>itheima-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.example</groupId>-->
+<!--            <artifactId>itheima-utils</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
     </dependencies>
     <build>
         <plugins>
