@@ -1,2 +1,12 @@
-!/tlias-web-management/target/
-!/Web-AI-project02.iml
+# Maven
+target/
+*.class
+*.log
+
+# IDEA
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
